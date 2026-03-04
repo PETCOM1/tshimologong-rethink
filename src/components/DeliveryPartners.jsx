@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../assets/Tshimologong_Logo.png';
 
+
 const DeliveryPartners = () => {
     const partners = [
         {
@@ -19,9 +20,18 @@ const DeliveryPartners = () => {
         },
         {
             name: 'University of the Witwatersrand',
-            logo: 'https://www.wits.ac.za/media/wits-university/news-and-events/images/logos-and-icons/Wits-Colloquial-colour-stack-600x300-600x300.png',
-            isImage: true,
-            filter: 'brightness(0) invert(1)',
+            isImage: false,
+            isCustom: true,
+            component: (
+                <span style={{
+                    fontSize: '2.5rem',
+                    fontWeight: 800,
+                    fontFamily: 'Georgia, serif',
+                    color: 'var(--text-primary)',
+                    letterSpacing: '0.25em',
+                    textShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                }}>WITS University</span>
+            ),
             link: 'https://www.wits.ac.za/'
         }
     ];
@@ -40,8 +50,10 @@ const DeliveryPartners = () => {
                     {partners.map((p, i) => (
                         <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <div style={{ height: 'clamp(80px, 10vw, 120px)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
-                                {p.isImage ? (
-                                    <img src={p.logo} alt={p.name} className="logo-themed" style={{ maxHeight: '100px', maxWidth: '100%', objectFit: 'contain', filter: p.filter || 'none' }} />
+                                {p.isCustom ? (
+                                    p.component
+                                ) : p.isImage ? (
+                                    <img src={p.logo} alt={p.name} className={p.className || 'logo-themed'} style={{ maxHeight: '100px', maxWidth: '100%', objectFit: 'contain', filter: p.className === 'logo-natural' ? 'brightness(0.75)' : 'brightness(0) invert(1)', background: p.background || 'transparent', borderRadius: p.background ? '12px' : '0', padding: p.background ? '10px 16px' : '0' }} />
                                 ) : (
                                     p.icon
                                 )}

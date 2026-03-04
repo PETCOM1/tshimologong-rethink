@@ -240,6 +240,19 @@ h3 {
   filter: brightness(0) invert(1) !important;
 }
 
+/* Dark mode: invert turns white→black, hue-rotate restores original colours,
+   screen blend makes black (was white) disappear on dark backgrounds */
+.logo-natural {
+  filter: invert(1) hue-rotate(180deg) saturate(1.8) brightness(1.4) !important;
+  mix-blend-mode: screen;
+}
+
+/* Light mode: white bg merges naturally with the near-white page bg */
+[data-theme='light'] .logo-natural {
+  filter: none !important;
+  mix-blend-mode: normal;
+}
+
 .mobile-only {
   display: none !important;
 }
